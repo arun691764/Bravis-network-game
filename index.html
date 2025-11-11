@@ -3,112 +3,123 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Puzzle Quiz Game</title>
+<title>Solve the Puzzle — Contribute to the Project</title>
 <style>
 :root{
-  --bg:#1a1a2e; --accent:#00d4ff; --correct:#10b981; --wrong:#ef4444; --muted:#aaa;
-  --opt1:#ff6b6b; --opt2:#4ecdc4; --opt3:#f7b801; --opt4:#9b5de5;
+  --bg:#06061a;
+  --tile-bg:#0b1220;
+  --accent:#00d4ff;
+  --muted:#9aa4b2;
+  --correct:#10b981;
 }
-body{
-  margin:0; font-family:Arial, sans-serif; background:var(--bg); color:#fff; display:flex; justify-content:center; padding:20px;
-}
-.wrap{max-width:700px; width:100%; display:flex; flex-direction:column; gap:20px;}
-header{background:#0f0f1a; padding:20px; border-radius:12px; text-align:center;}
-h1{color:var(--accent); margin:0; font-size:28px;}
-.card{background:rgba(255,255,255,0.05); padding:20px; border-radius:12px;}
-.question{font-size:20px; font-weight:700; margin-bottom:14px;}
-.options{display:flex; flex-direction:column; gap:10px;}
-button.opt{padding:12px 16px; border:none; border-radius:10px; font-weight:700; font-size:16px; cursor:pointer; color:#fff; transition:0.12s;}
-button.opt:nth-child(1){background:var(--opt1);}
-button.opt:nth-child(2){background:var(--opt2);}
-button.opt:nth-child(3){background:var(--opt3);}
-button.opt:nth-child(4){background:var(--opt4);}
-button.opt:hover{transform:translateY(-2px);}
-button.opt:disabled{opacity:0.8; cursor:default; transform:none;}
-.correct{background:var(--correct)!important;}
-.wrong{background:var(--wrong)!important;}
-.controls{display:flex; justify-content:flex-end; margin-top:14px;}
-.next{padding:10px 18px; border:none; border-radius:10px; font-weight:700; cursor:pointer; background:var(--accent); color:#001;}
-.result{font-size:22px; font-weight:700; text-align:center;}
-.small{font-size:14px; color:var(--muted); text-align:center; margin-top:10px;}
+body{margin:0; font-family:Arial,sans-serif; background:linear-gradient(180deg,var(--bg),#031025); color:#fff; display:flex; flex-direction:column; align-items:center; padding:20px;}
+header{max-width:900px; text-align:center; margin-bottom:20px;}
+header h1{color:var(--accent); font-size:26px; margin-bottom:8px;}
+header p{color:var(--muted);}
+#puzzle-container{display:grid; grid-template-columns:repeat(3,100px); grid-template-rows:repeat(3,100px); gap:4px;}
+.tile{width:100px; height:100px; background-size:300px 300px; cursor:pointer; transition:0.2s; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:18px; color:#fff; border-radius:8px;}
+.empty{background:none; cursor:default;}
+#result{margin-top:20px; display:none; max-width:700px; text-align:center;}
+#result h2{color:var(--accent);}
+#result ul{text-align:left; margin-top:12px; color:#fff; padding-left:20px;}
+#result li{margin-bottom:6px;}
+.tile:hover{transform:scale(1.05);}
 </style>
 </head>
 <body>
-<div class="wrap">
+
 <header>
-  <h1>Puzzle Quiz Challenge</h1>
+  <h1>Solve this puzzle and see how you can contribute to the project — 99.9% role you can take</h1>
+  <p>Click on a tile adjacent to the empty space to move it. Arrange tiles to complete the image.</p>
 </header>
 
-<section id="quizCard" class="card">
-  <div id="contentArea"></div>
-  <div class="controls" id="controls" style="display:none">
-    <button id="nextBtn" class="next">Next</button>
-  </div>
-</section>
+<div id="puzzle-container"></div>
 
-<section id="resultCard" class="card" style="display:none">
-  <div class="result" id="resultContent"></div>
-  <div class="small">You can refresh the page to play again.</div>
-</section>
+<div id="result">
+  <h2>🎉 Congratulations! You can make high-quality contributions to the project.</h2>
+  <ul>
+    <li>Participate in real-time proving optimization</li>
+    <li>Contribute to zk-based computation modules</li>
+    <li>Help improve project documentation and tutorials</li>
+    <li>Suggest improvements for UI/UX and tooling</li>
+    <li>Join discussions on project roadmap and research</li>
+  </ul>
 </div>
 
 <script>
-// Project-related puzzle questions
-const QUESTIONS = [
-  {q:"Which data structure is best for LIFO operations?", opts:["Queue","Stack","Array","Graph"], a:1},
-  {q:"Which sorting algorithm is fastest on average for large datasets?", opts:["Bubble Sort","Quick Sort","Insertion Sort","Selection Sort"], a:1},
-  {q:"Which protocol is used to securely browse the web?", opts:["HTTP","FTP","HTTPS","SMTP"], a:2},
-  {q:"Which database is document-based?", opts:["MySQL","PostgreSQL","MongoDB","SQLite"], a:2},
-  {q:"Which CSS property changes text color?", opts:["background-color","font-size","color","margin"], a:2},
-  {q:"Which Git command creates a new branch?", opts:["git init","git branch","git commit","git merge"], a:1},
-  {q:"Which HTML tag defines a table row?", opts:["<td>","<tr>","<th>","<table>"], a:1},
-  {q:"Which JS function parses JSON strings?", opts:["JSON.parse()","JSON.stringify()","eval()","parseInt()"], a:0},
-  {q:"Which keyword declares a constant in JS?", opts:["let","var","const","function"], a:2},
-  {q:"Which symbol is used for ID selectors in CSS?", opts:[".","#","$","@"], a:1}
-];
+// Puzzle configuration
+const size = 3;
+const container = document.getElementById('puzzle-container');
+let tiles = [];
+let empty = {x:2, y:2}; // bottom-right empty
 
-let index=0, score=0;
-const contentArea=document.getElementById('contentArea');
-const controls=document.getElementById('controls');
-const nextBtn=document.getElementById('nextBtn');
-const quizCard=document.getElementById('quizCard');
-const resultCard=document.getElementById('resultCard');
-const resultContent=document.getElementById('resultContent');
-
-function renderQuestion(i){
-  const item=QUESTIONS[i];
-  contentArea.innerHTML=`<div class="question">Q${i+1}. ${item.q}</div>
-    <div class="options" id="opts"></div>`;
-  const optsDiv=document.getElementById('opts');
-  item.opts.forEach((opt, idx)=>{
-    const b=document.createElement('button'); b.className='opt'; b.innerText=opt;
-    b.onclick=()=>handleAnswer(b, idx, item.a); optsDiv.appendChild(b);
-  });
-  controls.style.display='flex'; nextBtn.style.display='none';
+// Load image and create tiles
+const imgURL = "https://via.placeholder.com/300x300.png?text=Project+Puzzle"; // Replace with project-related image
+for(let y=0; y<size; y++){
+  for(let x=0; x<size; x++){
+    let div = document.createElement('div');
+    div.classList.add('tile');
+    if(x===size-1 && y===size-1){ div.classList.add('empty'); div.innerText=''; }
+    else{
+      div.style.backgroundImage=`url(${imgURL})`;
+      div.style.backgroundPosition=`-${x*100}px -${y*100}px`;
+    }
+    div.dataset.x=x; div.dataset.y=y;
+    container.appendChild(div);
+    tiles.push(div);
+    div.addEventListener('click', ()=>moveTile(x,y));
+  }
 }
 
-function handleAnswer(button, chosen, correct){
-  document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
-  if(chosen===correct){button.classList.add('correct'); score++;}
-  else{button.classList.add('wrong'); document.querySelectorAll('.opt')[correct].classList.add('correct');}
-  nextBtn.style.display='inline-block';
-  nextBtn.innerText=(index===QUESTIONS.length-1)?'Finish':'Next';
+// Shuffle function (simple random moves)
+function shuffle(steps=1000){
+  for(let i=0;i<steps;i++){
+    const neighbors = tiles.filter(t=>{
+      const tx=+t.dataset.x, ty=+t.dataset.y;
+      return (Math.abs(tx-empty.x)+Math.abs(ty-empty.y)===1);
+    });
+    const t = neighbors[Math.floor(Math.random()*neighbors.length)];
+    moveTile(+t.dataset.x,+t.dataset.y,true);
+  }
 }
 
-nextBtn.addEventListener('click', ()=>{
-  index++;
-  if(index<QUESTIONS.length){renderQuestion(index);}
-  else{showResults();}
+// Move tile function
+function moveTile(x,y,skipCheck=false){
+  if(Math.abs(x-empty.x)+Math.abs(y-empty.y)!==1 && !skipCheck) return;
+  const tile = tiles.find(t=>+t.dataset.x===x && +t.dataset.y===y);
+  if(!tile) return;
+  // swap positions
+  [tile.dataset.x, empty.x] = [empty.x, tile.dataset.x];
+  [tile.dataset.y, empty.y] = [empty.y, tile.dataset.y];
+  tile.style.gridColumnStart = tile.dataset.x*1+1;
+  tile.style.gridRowStart = tile.dataset.y*1+1;
+  emptyDiv = tiles.find(t=>t.classList.contains('empty'));
+  emptyDiv.style.gridColumnStart = empty.x+1;
+  emptyDiv.style.gridRowStart = empty.y+1;
+  if(!skipCheck) checkWin();
+}
+
+// Initialize grid positions
+tiles.forEach(t=>{
+  t.style.gridColumnStart = +t.dataset.x+1;
+  t.style.gridRowStart = +t.dataset.y+1;
 });
 
-function showResults(){
-  quizCard.style.display='none';
-  resultCard.style.display='block';
-  resultContent.innerText=`You solved ${score} out of ${QUESTIONS.length} puzzles correctly!`;
+// Check if solved
+function checkWin(){
+  let solved=true;
+  tiles.forEach((t,i)=>{
+    const correctX=i%size;
+    const correctY=Math.floor(i/size);
+    if(+t.dataset.x!==correctX || +t.dataset.y!==correctY) solved=false;
+  });
+  if(solved){
+    document.getElementById('result').style.display='block';
+  }
 }
 
-// Initial render
-renderQuestion(index);
+// Start game
+shuffle();
 </script>
 </body>
 </html>
