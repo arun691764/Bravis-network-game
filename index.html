@@ -3,126 +3,185 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Solve the Puzzle — Contribute to the Project</title>
+<title>Play & Solve — Learn How You Can Contribute to Brevis Network</title>
 <style>
 :root{
-  --bg:#06061a;
-  --tile-bg:#0b1220;
-  --accent:#00d4ff;
-  --muted:#9aa4b2;
-  --correct:#10b981;
+  --bg1:#04102a; --bg2:#071233; --accent1:#00d4ff; --accent2:#7c3aed; --muted:#9aa4b2;
+  --opt1:#ff6b6b; --opt2:#4ecdc4; --opt3:#f7b801; --opt4:#9b5de5;
 }
-body{margin:0; font-family:Arial,sans-serif; background:linear-gradient(180deg,var(--bg),#031025); color:#fff; display:flex; flex-direction:column; align-items:center; padding:20px;}
-header{max-width:900px; text-align:center; margin-bottom:20px;}
-header h1{color:var(--accent); font-size:26px; margin-bottom:8px;}
-header p{color:var(--muted);}
-#puzzle-container{display:grid; grid-template-columns:repeat(3,120px); grid-template-rows:repeat(3,120px); gap:4px; margin-top:10px;}
-.tile{width:120px; height:120px; background-size:360px 360px; cursor:pointer; transition:0.2s; border-radius:8px;}
-.empty{background:none; cursor:default;}
-#result{margin-top:30px; display:none; max-width:700px; text-align:center;}
-#result h2{color:var(--accent);}
-#result ul{text-align:left; margin-top:12px; color:#fff; padding-left:20px;}
-#result li{margin-bottom:6px;}
-.tile:hover{transform:scale(1.05);}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background:linear-gradient(180deg,var(--bg1),var(--bg2)); color:#fff; display:flex; justify-content:center; padding:28px;
+}
+.wrap{max-width:980px;width:100%; display:flex; flex-direction:column; gap:18px;}
+header{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:26px;border-radius:16px;text-align:center;box-shadow:0 14px 50px rgba(2,6,23,0.7);border:1px solid rgba(255,255,255,0.03)}
+h1{font-size:32px;color:var(--accent1); margin:0;text-shadow:0 6px 30px rgba(0,212,255,0.06);}
+.sub{font-size:15px;color:var(--muted);margin-top:8px;font-weight:700;}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
+.question{font-size:18px;font-weight:800;padding:14px;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));}
+.options{display:flex; flex-direction:column; gap:10px;margin-top:12px;}
+button.opt{padding:14px 16px;border-radius:12px;border:none;font-weight:800;font-size:15px;cursor:pointer;color:#001;transition:0.12s;background:linear-gradient(90deg,var(--accent1),var(--accent2));}
+button.opt.small{font-size:14px}
+button.opt:hover{transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,0.35);}
+button.opt:disabled{opacity:0.9;cursor:default;transform:none;}
+.correct{box-shadow:0 8px 24px rgba(16,185,129,0.28)!important;border:2px solid #10b981!important;background:linear-gradient(90deg,#22c55e,#10b981)!important;color:#001}
+.wrong{box-shadow:0 8px 24px rgba(239,68,68,0.28)!important;border:2px solid #ef4444!important;background:linear-gradient(90deg,#fb7185,#ef4444)!important;color:#001}
+.controls{display:flex; justify-content:space-between; align-items:center; margin-top:14px;}
+.next{background:linear-gradient(90deg,var(--accent1),var(--accent2));border:none;color:#001;padding:12px 22px;border-radius:12px;font-weight:800;cursor:pointer;box-shadow:0 12px 30px rgba(0,212,255,0.12);}
+.resultCard{display:flex;flex-direction:column;gap:12px;align-items:center;padding:22px;}
+.score{font-size:22px;font-weight:900;color:var(--accent1);}
+.trophy{font-size:76px;margin-top:6px}
+.rewardImg{width:100%;max-width:560px;border-radius:12px;box-shadow:0 18px 60px rgba(0,0,0,0.6);}
+.shareRow{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.btn{padding:10px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
+.downloadBtn{background:var(--accent1);color:#001}
+.shareBtn{background:var(--accent2);color:#fff}
+.small{font-size:13px;color:var(--muted);text-align:center}
+.contribute{background:linear-gradient(180deg, rgba(124,58,237,0.06), rgba(0,212,255,0.03));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);max-width:780px}
+.contribute h3{margin:0 0 8px 0;color:var(--accent2)}
+.contribute ol{padding-left:20px;margin:0}
+.contribute li{margin:8px 0;color:#cfe9ff}
 </style>
 </head>
 <body>
-
+<div class="wrap">
 <header>
-  <h1>Solve this puzzle and see how you can contribute to the project — 99.9% role you can take</h1>
-  <p>Click on a tile adjacent to the empty space to move it. Arrange tiles to complete the image.</p>
+  <h1>Play & Solve — Learn How You Can Contribute to Brevis Network</h1>
+  <div class="sub">Welcome to Brevis Network — Earn art & learn how to contribute with real impact.</div>
 </header>
 
-<div id="puzzle-container"></div>
+<section id="quizCard" class="card">
+  <div id="contentArea"></div>
+  <div class="controls" id="controls" style="display:none">
+    <div class="progress" id="progressText">Question 1/10</div>
+    <button id="nextBtn" class="next">Next</button>
+  </div>
+</section>
 
-<div id="result">
-  <h2>🎉 Congratulations! You can make high-quality contributions to the project.</h2>
-  <ul>
-    <li>Participate in real-time proving optimization</li>
-    <li>Contribute to zk-based computation modules</li>
-    <li>Help improve project documentation and tutorials</li>
-    <li>Suggest improvements for UI/UX and tooling</li>
-    <li>Join discussions on project roadmap and research</li>
-  </ul>
+<section id="resultCard" class="card" style="display:none">
+  <div class="resultCard" id="resultContent"></div>
+</section>
 </div>
 
 <script>
-// Puzzle configuration
-const size = 3;
-const container = document.getElementById('puzzle-container');
-let tiles = [];
-let empty = {x:2, y:2}; // bottom-right empty
+// Questions (kept simple & informative about Brevis/Pico Prism)
+const QUESTIONS = [
+  {q:"What technology does Brevis use to prove computations privately?", opts:["Zero-knowledge proofs","Proof-of-work","Federated learning","Differential privacy"], a:0},
+  {q:"Approximate gas size targeted by Pico Prism for large Ethereum blocks?", opts:["~45M","~1M","~500","~100B"], a:0},
+  {q:"Key benefit of running proofs on consumer hardware?", opts:["Lower costs","Higher centralization","More power consumption","Less security"], a:0},
+  {q:"Why is real-time proving important for on-chain applications?", opts:["Quick verification on-chain","Increases token supply","Slows consensus","Reduces decentralization"], a:0},
+  {q:"Primary aim of Brevis's zk work?", opts:["Private verifiable computation","Create social network","Mine more coins","Replace smart contracts"], a:0},
+  {q:"Which capability is similar to what FHE provides?", opts:["Compute on encrypted data","Faster graphics","Unlimited storage","Messaging"], a:0},
+  {q:"Pico Prism primarily improves which area?", opts:["Prover performance","Wallet UI","Token economics","Animations"], a:0},
+  {q:"A practical goal of real-time proving is to enable?", opts:["Cheap frequent proofs","Remove consensus","Increase gas","Stop contracts"], a:0},
+  {q:"What is Brevis Network's primary target chain?", opts:["Ethereum","Bitcoin","XRP Ledger","Monero"], a:0},
+  {q:"Faster and cheaper proofs enable what?", opts:["Private scalable dApps","Slower apps","Central servers","Large wallets"], a:0}
+];
 
-// Use your uploaded image
-const imgURL = "447286674_122148951950107920_3823121155551362087_n.jpg";
+// Placeholder art & meme URLs (you can replace with your hosted assets)
+const ART_URLS = Array.from({length:30}, (_,i)=>`https://via.placeholder.com/560x320.png?text=Brevis+Art+${i+1}`);
+const MEME_URLS = Array.from({length:10}, (_,i)=>`https://via.placeholder.com/400x400.png?text=Brevis+Meme+${i+1}`);
 
-// Create tiles
-for(let y=0; y<size; y++){
-  for(let x=0; x<size; x++){
-    const div = document.createElement('div');
-    div.classList.add('tile');
-    if(x===size-1 && y===size-1){
-      div.classList.add('empty');
-    } else {
-      div.style.backgroundImage = `url(${imgURL})`;
-      div.style.backgroundPosition = `-${x*120}px -${y*120}px`;
-    }
-    div.dataset.x=x; div.dataset.y=y;
-    container.appendChild(div);
-    tiles.push(div);
-    div.addEventListener('click', ()=>moveTile(x,y));
-  }
+let index=0, score=0;
+const contentArea=document.getElementById('contentArea');
+const controls=document.getElementById('controls');
+const nextBtn=document.getElementById('nextBtn');
+const progressText=document.getElementById('progressText');
+const resultCard=document.getElementById('resultCard');
+const resultContent=document.getElementById('resultContent');
+const quizCard=document.getElementById('quizCard');
+
+function renderQuestion(i){
+  const item=QUESTIONS[i];
+  contentArea.innerHTML=`<div class="question"><strong>Q${i+1}. ${escapeHtml(item.q)}</strong></div>
+  <div class="options" id="opts"></div>`;
+  const optsDiv=document.getElementById('opts');
+  item.opts.forEach((opt, idx)=>{
+    const b=document.createElement('button');
+    b.className='opt';
+    b.innerHTML=`<span style="font-weight:900">${String.fromCharCode(65+idx)}.</span> ${escapeHtml(opt)}`;
+    b.onclick=()=>handleAnswer(b, idx, item.a);
+    optsDiv.appendChild(b);
+  });
+  controls.style.display='flex';
+  progressText.textContent=`Question ${i+1} / ${QUESTIONS.length}`;
+  nextBtn.style.display='none';
 }
 
-// Shuffle tiles
-function shuffle(steps=500){
-  for(let i=0;i<steps;i++){
-    const neighbors = tiles.filter(t=>{
-      const tx=+t.dataset.x, ty=+t.dataset.y;
-      return (Math.abs(tx-empty.x)+Math.abs(ty-empty.y)===1);
-    });
-    const t = neighbors[Math.floor(Math.random()*neighbors.length)];
-    moveTile(+t.dataset.x,+t.dataset.y,true);
-  }
+function handleAnswer(button, chosen, correct){
+  document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+  if(chosen===correct){button.classList.add('correct'); score++;} 
+  else{button.classList.add('wrong'); const correctBtn=document.querySelectorAll('.opt')[correct]; if(correctBtn) correctBtn.classList.add('correct');}
+  nextBtn.style.display='inline-block';
+  nextBtn.textContent=(index===QUESTIONS.length-1)?'Finish':'Next';
 }
 
-// Move tile function
-function moveTile(x,y,skipCheck=false){
-  if(Math.abs(x-empty.x)+Math.abs(y-empty.y)!==1 && !skipCheck) return;
-  const tile = tiles.find(t=>+t.dataset.x===x && +t.dataset.y===y);
-  if(!tile) return;
-  [tile.dataset.x, empty.x] = [empty.x, tile.dataset.x];
-  [tile.dataset.y, empty.y] = [empty.y, tile.dataset.y];
-  tile.style.gridColumnStart = +tile.dataset.x + 1;
-  tile.style.gridRowStart = +tile.dataset.y + 1;
-  const emptyDiv = tiles.find(t=>t.classList.contains('empty'));
-  emptyDiv.style.gridColumnStart = empty.x + 1;
-  emptyDiv.style.gridRowStart = empty.y + 1;
-  if(!skipCheck) checkWin();
-}
-
-// Initialize tile positions
-tiles.forEach(t=>{
-  t.style.gridColumnStart = +t.dataset.x + 1;
-  t.style.gridRowStart = +t.dataset.y + 1;
+nextBtn.addEventListener('click', ()=>{
+  index++; if(index<QUESTIONS.length){renderQuestion(index);} 
+  else{showResults();}
 });
 
-// Check if solved
-function checkWin(){
-  let solved=true;
-  tiles.forEach((t,i)=>{
-    const correctX=i%size;
-    const correctY=Math.floor(i/size);
-    if(+t.dataset.x!==correctX || +t.dataset.y!==correctY) solved=false;
-  });
-  if(solved){
-    document.getElementById('result').style.display='block';
+function showResults(){
+  quizCard.style.display='none';
+  resultCard.style.display='block';
+  resultContent.innerHTML='';
+  
+  const scoreDiv=document.createElement('div'); scoreDiv.className='score';
+  scoreDiv.innerHTML=`Your score: <strong>${score}/${QUESTIONS.length}</strong>`; resultContent.appendChild(scoreDiv);
+  
+  const trophy=document.createElement('div'); trophy.className='trophy';
+  trophy.textContent=(score>=7)?'🏆':'🔒'; resultContent.appendChild(trophy);
+  
+  const small=document.createElement('div'); small.className='small';
+  small.textContent=(score>=7)?'Congrats! You qualified for a Brevis art reward and unlocked contributor guidance.':'Try again to win Brevis art and unlock contributor tips!'; resultContent.appendChild(small);
+
+  if(score>=7){
+    const artIndex=Math.floor(Math.random()*ART_URLS.length);
+    const artPath=ART_URLS[artIndex];
+    const img=document.createElement('img'); img.className='rewardImg'; img.src=artPath; img.alt='Reward Art';
+    resultContent.appendChild(img);
+
+    // Contribution guidance block (step-by-step) in English
+    const contrib=document.createElement('div'); contrib.className='contribute';
+    contrib.innerHTML = `
+      <h3>Welcome to Brevis Network — How you can contribute (step-by-step)</h3>
+      <ol>
+        <li><strong>Read the docs:</strong> Start with the official Brevis & Pico Prism documentation to understand architecture and goals.</li>
+        <li><strong>Join the community:</strong> Join Brevis channels (Discord / Telegram / Forum) and follow GitHub repos to stay updated.</li>
+        <li><strong>Run locally:</strong> Set up the Pico Prism demo or node on your machine to reproduce proofs and test on consumer hardware.</li>
+        <li><strong>Report & Improve:</strong> Open issues for bugs or performance gaps and propose reproducible test cases.</li>
+        <li><strong>Code contributions:</strong> Submit PRs for docs, tests, tooling, or performance improvements; small PRs are welcome.</li>
+        <li><strong>Write & Share:</strong> Publish tutorials, demos, or benchmark results to help users run proofs and integrate Brevis.</li>
+        <li><strong>Design & QA:</strong> Help with UI/UX, sample apps, or quality assurance to make integrations smoother.</li>
+      </ol>
+      <div style="margin-top:10px;color:#cfe9ff;font-weight:700">High-quality contributions (code, docs, benchmarks, tutorials) are highly valued — welcome aboard!</div>
+    `;
+    resultContent.appendChild(contrib);
+
+    const row=document.createElement('div'); row.className='shareRow';
+    const dl=document.createElement('a'); dl.href=artPath; dl.download=`brevis-art-${artIndex+1}.png`;
+    const dlbtn=document.createElement('button'); dlbtn.className='btn downloadBtn'; dlbtn.textContent='⬇️ Download Art'; dl.appendChild(dlbtn); row.appendChild(dl);
+
+    const memeIndex=Math.floor(Math.random()*MEME_URLS.length);
+    const memePath=MEME_URLS[memeIndex];
+    const dlM=document.createElement('a'); dlM.href=memePath; dlM.download=`brevis-meme-${memeIndex+1}.png`;
+    const dlMbtn=document.createElement('button'); dlMbtn.className='btn downloadBtn'; dlMbtn.textContent='⬇️ Download Meme'; dlM.appendChild(dlMbtn); row.appendChild(dlM);
+
+    const shareBtn=document.createElement('button'); shareBtn.className='btn shareBtn'; shareBtn.textContent='🐦 Share on X';
+    shareBtn.onclick=()=>{ const text=`I unlocked Brevis art and contributor tips on the Brevis Network! #BrevisChallenge`; 
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');};
+    row.appendChild(shareBtn);
+
+    resultContent.appendChild(row);
+  } else{
+    const tryBtn=document.createElement('button'); tryBtn.className='next'; tryBtn.textContent='Try Again';
+    tryBtn.onclick=()=>location.reload(); resultContent.appendChild(tryBtn);
   }
 }
 
-// Start game
-shuffle();
+function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+renderQuestion(index);
 </script>
 </body>
 </html>
-
