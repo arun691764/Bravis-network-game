@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Brevis Network Quiz — Play & Contribute</title>
 <style>
 :root{
@@ -10,12 +10,27 @@
   --opt1:#ff6b6b; --opt2:#4ecdc4; --opt3:#f7b801; --opt4:#9b5de5;
   --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
 }
+/* Base */
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial; background:linear-gradient(180deg,var(--bg1),var(--bg2)); color:#fff; display:flex;justify-content:center;padding:28px}
+body{
+  margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:#fff; display:flex; justify-content:center; padding:28px;
+}
 .wrap{max-width:980px;width:100%;display:flex;flex-direction:column;gap:18px}
-header{padding:30px;border-radius:16px;text-align:center;box-shadow:0 14px 50px rgba(2,6,23,0.7);border:1px solid rgba(255,255,255,0.03); background:radial-gradient(800px 240px at 10% 10%, rgba(0,212,255,0.06), transparent), linear-gradient(180deg, rgba(124,58,237,0.06), rgba(7,18,51,0.6));}
+
+/* Header */
+header{
+  padding:30px;border-radius:16px;text-align:center;
+  box-shadow:0 14px 50px rgba(2,6,23,0.7);
+  border:1px solid rgba(255,255,255,0.03);
+  background:radial-gradient(800px 240px at 10% 10%, rgba(0,212,255,0.06), transparent),
+             linear-gradient(180deg, rgba(124,58,237,0.06), rgba(7,18,51,0.6));
+}
 h1{font-size:44px;color:var(--accent1);margin:0;font-weight:800;text-shadow:0 12px 48px rgba(0,212,255,0.10)}
 .credit{margin-top:8px;color:#cfe9ff;font-weight:700;font-size:14px}
+
+/* Subtitle (yellow bg, black bold text) */
 .sub{
   font-size:22px;
   color:#000;
@@ -28,27 +43,36 @@ h1{font-size:44px;color:var(--accent1);margin:0;font-weight:800;text-shadow:0 12
   text-shadow:none;
   box-shadow:0 4px 18px rgba(255,204,0,0.4);
 }
+
+/* Card / quiz UI */
 .card{background:var(--card-bg);padding:20px;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
 .question{font-size:18px;font-weight:800;padding:14px;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));}
 .options{display:flex;flex-direction:column;gap:10px;margin-top:12px}
-button.opt{padding:14px 16px;border-radius:12px;border:none;font-weight:800;font-size:15px;cursor:pointer;color:#001;transition:0.12s;background:none}
+
+/* Option buttons: make text black so visible on dark bg */
+button.opt{
+  padding:14px 16px;border-radius:12px;border:none;font-weight:800;font-size:15px;
+  cursor:pointer;color:#000;transition:0.12s;background:none;text-align:left;
+}
 button.opt:nth-child(1){background:linear-gradient(90deg,var(--opt1),#ff8b8b)}
 button.opt:nth-child(2){background:linear-gradient(90deg,var(--opt2),#76efe6)}
 button.opt:nth-child(3){background:linear-gradient(90deg,var(--opt3),#ffd76a)}
 button.opt:nth-child(4){background:linear-gradient(90deg,var(--opt4),#b88cff)}
 button.opt:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.35)}
 button.opt:disabled{opacity:0.9;cursor:default;transform:none}
+
+/* Correct / wrong visuals */
 .correct{box-shadow:0 8px 24px rgba(16,185,129,0.28)!important;border:2px solid #10b981!important;background:linear-gradient(90deg,#22c55e,#10b981)!important;color:#001}
 .wrong{box-shadow:0 8px 24px rgba(239,68,68,0.28)!important;border:2px solid #ef4444!important;background:linear-gradient(90deg,#fb7185,#ef4444)!important;color:#001}
+
 .controls{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
 .next{background:linear-gradient(90deg,var(--accent1),var(--accent2));border:none;color:#001;padding:12px 22px;border-radius:12px;font-weight:800;cursor:pointer;box-shadow:0 12px 30px rgba(0,212,255,0.12)}
+
 .resultCard{display:flex;flex-direction:column;gap:12px;align-items:center;padding:22px}
 .score{font-size:22px;font-weight:900;color:var(--accent1)}
 .trophy{font-size:76px;margin-top:6px}
-.contribute{background:linear-gradient(180deg, rgba(124,58,237,0.06), rgba(0,212,255,0.03));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);max-width:780px}
-.contribute h3{margin:0 0 8px 0;color:var(--accent2)}
-.contribute ol{padding-left:20px;margin:0}
-.contribute li{margin:8px 0;color:#cfe9ff}
+
+/* Yellow highlighted small message for win */
 .small{
   font-size:15px;
   color:#000;
@@ -60,10 +84,17 @@ button.opt:disabled{opacity:0.9;cursor:default;transform:none}
   font-weight:900;
   box-shadow:0 4px 18px rgba(255,204,0,0.4);
 }
+
+/* Contributor block, share row */
+.contribute{background:linear-gradient(180deg, rgba(124,58,237,0.06), rgba(0,212,255,0.03));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);max-width:780px}
+.contribute h3{margin:0 0 8px 0;color:var(--accent2)}
+.contribute ol{padding-left:20px;margin:0}
+.contribute li{margin:8px 0;color:#cfe9ff}
+
 .shareRow{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;justify-content:center}
 .btn{padding:10px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
-.downloadBtn{background:var(--accent1);color:#001}
 .shareBtn{background:var(--accent2);color:#fff}
+.restartBtn{background:linear-gradient(90deg,#ffd76a,#ffcc00);border:none;color:#001;padding:10px 14px;border-radius:12px;font-weight:800;cursor:pointer}
 </style>
 </head>
 <body>
@@ -88,17 +119,18 @@ button.opt:disabled{opacity:0.9;cursor:default;transform:none}
 </div>
 
 <script>
+/* QUESTIONS: keep them accurate and concise */
 const QUESTIONS = [
-  {q:"What technology does Brevis use to prove computations privately?", opts:["Zero-knowledge proofs","Proof-of-work","Federated learning","Differential privacy"], correctIndex:0},
-  {q:"Approximate gas size targeted by Pico Prism for large Ethereum blocks?", opts:["~45M","~1M","~500","~100B"], correctIndex:0},
-  {q:"Key benefit of running proofs on consumer hardware?", opts:["Lower costs","Higher centralization","More power consumption","Less security"], correctIndex:0},
-  {q:"Why is real-time proving important for on-chain applications?", opts:["Quick verification on-chain","Increases token supply","Slows consensus","Reduces decentralization"], correctIndex:0},
-  {q:"Primary aim of Brevis's zk work?", opts:["Private verifiable computation","Create social network","Mine more coins","Replace smart contracts"], correctIndex:0},
-  {q:"Which capability is similar to what FHE provides?", opts:["Compute on encrypted data","Faster graphics","Unlimited storage","Messaging"], correctIndex:0},
-  {q:"Pico Prism primarily improves which area?", opts:["Prover performance","Wallet UI","Token economics","Animations"], correctIndex:0},
-  {q:"A practical goal of real-time proving is to enable?", opts:["Cheap frequent proofs","Remove consensus","Increase gas","Stop contracts"], correctIndex:0},
-  {q:"What is Brevis Network's primary target chain?", opts:["Ethereum","Bitcoin","XRP Ledger","Monero"], correctIndex:0},
-  {q:"Faster and cheaper proofs enable what?", opts:["Private scalable dApps","Slower apps","Central servers","Large wallets"], correctIndex:0}
+  { q: "What technology does Brevis use to prove computations privately?", opts:["Zero-knowledge proofs","Proof-of-work","Federated learning","Differential privacy"], correctIndex:0 },
+  { q: "Approximate gas size targeted by Pico Prism for large Ethereum blocks?", opts:["~45M","~1M","~500","~100B"], correctIndex:0 },
+  { q: "Key benefit of running proofs on consumer hardware?", opts:["Lower costs","Higher centralization","More power consumption","Less security"], correctIndex:0 },
+  { q: "Why is real-time proving important for on-chain applications?", opts:["Quick verification on-chain","Increases token supply","Slows consensus","Reduces decentralization"], correctIndex:0 },
+  { q: "Primary aim of Brevis's zk work?", opts:["Private verifiable computation","Create social network","Mine more coins","Replace smart contracts"], correctIndex:0 },
+  { q: "Which capability is similar to what FHE provides?", opts:["Compute on encrypted data","Faster graphics","Unlimited storage","Messaging"], correctIndex:0 },
+  { q: "Pico Prism primarily improves which area?", opts:["Prover performance","Wallet UI","Token economics","Animations"], correctIndex:0 },
+  { q: "A practical goal of real-time proving is to enable?", opts:["Cheap frequent proofs","Remove consensus","Increase gas","Stop contracts"], correctIndex:0 },
+  { q: "What is Brevis Network's primary target chain?", opts:["Ethereum","Bitcoin","XRP Ledger","Monero"], correctIndex:0 },
+  { q: "Faster and cheaper proofs enable what?", opts:["Private scalable dApps","Slower apps","Central servers","Large wallets"], correctIndex:0 }
 ];
 
 let index = 0, score = 0;
@@ -111,52 +143,61 @@ const resultContent = document.getElementById('resultContent');
 const quizCard = document.getElementById('quizCard');
 
 function shuffleArray(arr){
-  for(let i=arr.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [arr[i],arr[j]]=[arr[j],arr[i]];
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
 }
 
 function renderQuestion(i){
   const item = QUESTIONS[i];
-  const pairs = item.opts.map((o, idx)=>({text:o, correct: idx===item.correctIndex}));
+  // Build pairs and shuffle so correct option is random position each time
+  const pairs = item.opts.map((o, idx) => ({ text: o, correct: idx === item.correctIndex }));
   shuffleArray(pairs);
 
-  contentArea.innerHTML = `<div class='question'><strong>Q${i+1}. ${escapeHtml(item.q)}</strong></div><div class='options' id='opts'></div>`;
+  contentArea.innerHTML = `<div class="question"><strong>Q${i+1}. ${escapeHtml(item.q)}</strong></div>
+    <div class="options" id="opts"></div>`;
+
   const optsDiv = document.getElementById('opts');
   pairs.forEach((p, idx) => {
     const b = document.createElement('button');
     b.className = 'opt';
-    b.innerHTML = `<span style='font-weight:900'>${String.fromCharCode(65+idx)}.</span> ${escapeHtml(p.text)}`;
+    b.innerHTML = `<span style="font-weight:900">${String.fromCharCode(65+idx)}.</span> ${escapeHtml(p.text)}`;
     b.dataset.correct = p.correct ? 'true' : 'false';
     b.onclick = () => handleAnswer(b);
     optsDiv.appendChild(b);
   });
+
   controls.style.display = 'flex';
   progressText.textContent = `Question ${i+1} / ${QUESTIONS.length}`;
   nextBtn.style.display = 'none';
 }
 
 function handleAnswer(button){
-  document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
   const correct = button.dataset.correct === 'true';
   if(correct){
-    button.classList.add('correct'); score++;
+    button.classList.add('correct');
+    score++;
   } else {
     button.classList.add('wrong');
+    // highlight the correct option
     const all = Array.from(document.querySelectorAll('.opt'));
-    const correctBtn = all.find(x=>x.dataset.correct==='true');
+    const correctBtn = all.find(x => x.dataset.correct === 'true');
     if(correctBtn) correctBtn.classList.add('correct');
   }
   nextBtn.style.display = 'inline-block';
-  nextBtn.textContent = (index === QUESTIONS.length-1) ? 'Finish' : 'Next';
+  nextBtn.textContent = (index === QUESTIONS.length - 1) ? 'Finish' : 'Next';
 }
 
-nextBtn.addEventListener('click', ()=>{
+nextBtn.addEventListener('click', () => {
   index++;
-  if(index < QUESTIONS.length){ renderQuestion(index); }
-  else { showResults(); }
+  if(index < QUESTIONS.length) {
+    renderQuestion(index);
+  } else {
+    showResults();
+  }
 });
 
 function showResults(){
@@ -165,24 +206,19 @@ function showResults(){
   resultContent.innerHTML = '';
 
   const scoreDiv = document.createElement('div'); scoreDiv.className = 'score';
-  scoreDiv.innerHTML = `Your score: <strong>${score}/${QUESTIONS.length}</strong>`; resultContent.appendChild(scoreDiv);
+  scoreDiv.innerHTML = `Your score: <strong>${score}/${QUESTIONS.length}</strong>`;
+  resultContent.appendChild(scoreDiv);
 
-  const trophy = document.createElement('div'); trophy.className = 'trophy'; trophy.textContent = (score>=7)?'🏆':'🔒'; resultContent.appendChild(trophy);
+  const trophy = document.createElement('div'); trophy.className = 'trophy';
+  trophy.textContent = (score >= 7) ? '🏆' : '🔒';
+  resultContent.appendChild(trophy);
 
   const small = document.createElement('div'); small.className = 'small';
-  if(score>=7){
+  if(score >= 7){
     small.innerHTML = '<strong>You have won this quiz!</strong><br/>Below are contribution steps and guidance to help you meaningfully contribute to the project and earn the 99% role.';
-  } else {
-    small.innerHTML = '<strong>Better luck next time!</strong><br/>Try again to unlock contributor guidance.';
-    const tryBtn = document.createElement('button');
-    tryBtn.className = 'next';
-    tryBtn.textContent = 'Try Again';
-    tryBtn.onclick = () => location.reload();
-    resultContent.appendChild(tryBtn);
-  }
-  resultContent.appendChild(small);
+    resultContent.appendChild(small);
 
-  if(score>=7){
+    // contributor guidance
     const contrib = document.createElement('div'); contrib.className = 'contribute';
     contrib.innerHTML = `
       <h3>Welcome to Brevis Network — How you can contribute (step-by-step)</h3>
@@ -195,7 +231,7 @@ function showResults(){
         <li><strong>Write & Share:</strong> Publish tutorials, demos, or benchmark results to help others run proofs and integrate Brevis.</li>
         <li><strong>Design & QA:</strong> Help with UI/UX, sample apps, or quality assurance to make integrations smoother.</li>
       </ol>
-      <h4 style='margin-top:12px;color:#00d4ff'>How to achieve the "99% role" (top contributor status)</h4>
+      <h4 style="margin-top:12px;color:#00d4ff">How to achieve the "99% role" (top contributor status)</h4>
       <ol>
         <li><strong>Consistent high-quality contributions:</strong> Make regular, well-documented PRs to code, tests, or documentation. Quality over quantity.</li>
         <li><strong>Performance benchmarks & reproducible tests:</strong> Provide clear benchmarks, reproducible scripts, and hardware profiles showing Pico Prism performance on consumer devices.</li>
@@ -205,21 +241,44 @@ function showResults(){
         <li><strong>Security & audits:</strong> Contribute to security reviews, test vectors, and suggested hardening steps — security contributions are highly valued.</li>
         <li><strong>Community leadership:</strong> Run workshops, create sample projects, or organize hackathons that drive adoption.</li>
       </ol>
-      <div style='margin-top:10px;color:#cfe9ff;font-weight:700'>Succeeding at these steps will put you in position to earn top contributor recognition — often referred to here as the "99% role". Focus on consistent, high-quality, and reproducible work.</div>
+      <div style="margin-top:10px;color:#cfe9ff;font-weight:700">Succeeding at these steps will put you in position to earn top contributor recognition — often referred to here as the "99% role". Focus on consistent, high-quality, and reproducible work.</div>
     `;
     resultContent.appendChild(contrib);
 
     const row = document.createElement('div'); row.className = 'shareRow';
-    const projectLink = document.createElement('a'); projectLink.href = 'https://blog.brevis.network/2025/10/15/pico-prism-99-6-real-time-proving-for-45m-gas-ethereum-blocks-on-consumer-hardware/'; projectLink.target='_blank';
-    const projBtn = document.createElement('button'); projBtn.className = 'btn shareBtn'; projBtn.textContent = 'Read Pico Prism — Brevis Blog'; projectLink.appendChild(projBtn); row.appendChild(projectLink);
+    const projectLink = document.createElement('a'); projectLink.href = 'https://blog.brevis.network/2025/10/15/pico-prism-99-6-real-time-proving-for-45m-gas-ethereum-blocks-on-consumer-hardware/'; projectLink.target = '_blank';
+    const projBtn = document.createElement('button'); projBtn.className = 'btn shareBtn'; projBtn.textContent = 'Read Pico Prism — Brevis Blog';
+    projectLink.appendChild(projBtn); row.appendChild(projectLink);
 
-    const shareBtn = document.createElement('button'); shareBtn.className = 'btn downloadBtn'; shareBtn.textContent = '🐦 Share on X';
-    shareBtn.onclick = ()=>{ const text = `I unlocked Brevis contributor guidance on the Brevis Network! #BrevisChallenge`; window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank'); };
+    const shareBtn = document.createElement('button'); shareBtn.className = 'btn shareBtn'; shareBtn.textContent = '🐦 Share on X';
+    shareBtn.onclick = ()=> { const text = `I unlocked Brevis contributor guidance on the Brevis Network! #BrevisChallenge`; window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank'); };
     row.appendChild(shareBtn);
 
-    const restartBtn = document.createElement('button');
-    restartBtn.className = 'next';
-    restartBtn.textContent = 'Restart Quiz';
+    // Restart button
+    const restartBtn = document.createElement('button'); restartBtn.className = 'restartBtn'; restartBtn.textContent = 'Restart Quiz';
     restartBtn.onclick = ()=> location.reload();
     row.appendChild(restartBtn);
 
+    resultContent.appendChild(row);
+
+  } else {
+    // Loss case: show message + Try Again button
+    small.innerHTML = '<strong>Better luck next time!</strong><br/>Try again to unlock contributor guidance.';
+    resultContent.appendChild(small);
+
+    const tryBtn = document.createElement('button'); tryBtn.className = 'next'; tryBtn.textContent = 'Try Again';
+    tryBtn.onclick = ()=> location.reload();
+    resultContent.appendChild(tryBtn);
+  }
+}
+
+/* escape helper */
+function escapeHtml(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ensure first question renders on load */
+window.onload = () => { renderQuestion(0); };
+</script>
+</body>
+</html>
