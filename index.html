@@ -15,13 +15,19 @@ body{
   background:linear-gradient(180deg,var(--bg1),var(--bg2)); color:#fff; display:flex; justify-content:center; padding:28px;
 }
 .wrap{max-width:980px;width:100%; display:flex; flex-direction:column; gap:18px;}
-header{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:26px;border-radius:16px;text-align:center;box-shadow:0 14px 50px rgba(2,6,23,0.7);border:1px solid rgba(255,255,255,0.03)}
+header{background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); padding:30px;border-radius:16px;text-align:center;box-shadow:0 14px 50px rgba(2,6,23,0.7);border:1px solid rgba(255,255,255,0.04)}
+h1{font-size:40px;color:var(--accent1); margin:0;text-shadow:0 8px 36px rgba(0,212,255,0.08);}
+.sub{font-size:16px;color:var(--muted);margin-top:10px;font-weight:800;}
 h1{font-size:32px;color:var(--accent1); margin:0;text-shadow:0 6px 30px rgba(0,212,255,0.06);}
 .sub{font-size:15px;color:var(--muted);margin-top:8px;font-weight:700;}
 .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
 .question{font-size:18px;font-weight:800;padding:14px;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));}
 .options{display:flex; flex-direction:column; gap:10px;margin-top:12px;}
-button.opt{padding:14px 16px;border-radius:12px;border:none;font-weight:800;font-size:15px;cursor:pointer;color:#001;transition:0.12s;background:linear-gradient(90deg,var(--accent1),var(--accent2));}
+button.opt{padding:14px 16px;border-radius:12px;border:none;font-weight:800;font-size:15px;cursor:pointer;color:#001;transition:0.12s;background:none}
+button.opt:nth-child(1){background:linear-gradient(90deg,var(--opt1),#ff8b8b);color:#001}
+button.opt:nth-child(2){background:linear-gradient(90deg,var(--opt2),#76efe6);color:#001}
+button.opt:nth-child(3){background:linear-gradient(90deg,var(--opt3),#ffd76a);color:#001}
+button.opt:nth-child(4){background:linear-gradient(90deg,var(--opt4),#b88cff);color:#001}
 button.opt.small{font-size:14px}
 button.opt:hover{transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,0.35);}
 button.opt:disabled{opacity:0.9;cursor:default;transform:none;}
@@ -46,10 +52,10 @@ button.opt:disabled{opacity:0.9;cursor:default;transform:none;}
 </head>
 <body>
 <div class="wrap">
-<header> 
-  <div class="sub">Welcome to Brevis Network</div>
-  <h1>Play & Solve — Learn How You Can Contribute to Brevis Network and get role 99% </h1>
-  </header>
+<header>
+  <h1>Welcome to Brevis Network</h1>
+  <div class="sub">Play & Solve — Learn how to contribute with real contribution and get the 99% role</div>
+</header>
 
 <section id="quizCard" class="card">
   <div id="contentArea"></div>
@@ -134,15 +140,8 @@ function showResults(){
   trophy.textContent=(score>=7)?'🏆':'🔒'; resultContent.appendChild(trophy);
   
   const small=document.createElement('div'); small.className='small';
-  small.textContent=(score>=7)?'Congrats! You qualified for a Brevis art reward and unlocked contributor guidance.':'Try again to win Brevis art and unlock contributor tips!'; resultContent.appendChild(small);
-
   if(score>=7){
-    const artIndex=Math.floor(Math.random()*ART_URLS.length);
-    const artPath=ART_URLS[artIndex];
-    const img=document.createElement('img'); img.className='rewardImg'; img.src=artPath; img.alt='Reward Art';
-    resultContent.appendChild(img);
-
-    // Contribution guidance block (step-by-step) in English
+    // Display contributor guidance only — no download options provided
     const contrib=document.createElement('div'); contrib.className='contribute';
     contrib.innerHTML = `
       <h3>Welcome to Brevis Network — How you can contribute (step-by-step)</h3>
@@ -152,24 +151,29 @@ function showResults(){
         <li><strong>Run locally:</strong> Set up the Pico Prism demo or node on your machine to reproduce proofs and test on consumer hardware.</li>
         <li><strong>Report & Improve:</strong> Open issues for bugs or performance gaps and propose reproducible test cases.</li>
         <li><strong>Code contributions:</strong> Submit PRs for docs, tests, tooling, or performance improvements; small PRs are welcome.</li>
-        <li><strong>Write & Share:</strong> Publish tutorials, demos, or benchmark results to help users run proofs and integrate Brevis.</li>
+        <li><strong>Write & Share:</strong> Publish tutorials, demos, or benchmark results to help others run proofs and integrate Brevis.</li>
         <li><strong>Design & QA:</strong> Help with UI/UX, sample apps, or quality assurance to make integrations smoother.</li>
       </ol>
-      <div style="margin-top:10px;color:#cfe9ff;font-weight:700">High-quality contributions (code, docs, benchmarks, tutorials) are highly valued — welcome aboard!</div>
+      <h4 style="margin-top:12px;color:#00d4ff">How to achieve the "99% role" (top contributor status)</h4>
+      <ol>
+        <li><strong>Consistent high-quality contributions:</strong> Make regular, well-documented PRs to code, tests, or documentation. Quality over quantity.</li>
+        <li><strong>Performance benchmarks & reproducible tests:</strong> Provide clear benchmarks, reproducible scripts, and hardware profiles showing Pico Prism performance on consumer devices.</li>
+        <li><strong>Fix real issues:</strong> Triage bugs, propose minimal reproducible fixes, and follow up with tests — contributors who solve hard problems get recognized.</li>
+        <li><strong>Author tutorials and demos:</strong> Build step-by-step guides, videos, or demo apps that help others run and integrate Brevis tech.</li>
+        <li><strong>Review & mentor:</strong> Review other PRs, write constructive feedback, and help newcomers — maintainers notice reliable reviewers.</li>
+        <li><strong>Security & audits:</strong> Contribute to security reviews, test vectors, and suggested hardening steps — security contributions are highly valued.</li>
+        <li><strong>Community leadership:</strong> Run workshops, create sample projects, or organize hackathons that drive adoption.</li>
+      </ol>
+      <div style="margin-top:10px;color:#cfe9ff;font-weight:700">Succeeding at these steps will put you in position to earn top contributor recognition — often referred to here as the "99% role". Focus on consistent, high-quality, and reproducible work.</div>
     `;
     resultContent.appendChild(contrib);
 
     const row=document.createElement('div'); row.className='shareRow';
-    const dl=document.createElement('a'); dl.href=artPath; dl.download=`brevis-art-${artIndex+1}.png`;
-    const dlbtn=document.createElement('button'); dlbtn.className='btn downloadBtn'; dlbtn.textContent='⬇️ Download Art'; dl.appendChild(dlbtn); row.appendChild(dl);
+    const projectLink=document.createElement('a'); projectLink.href='https://blog.brevis.network/2025/10/15/pico-prism-99-6-real-time-proving-for-45m-gas-ethereum-blocks-on-consumer-hardware/'; projectLink.target='_blank';
+    const projBtn=document.createElement('button'); projBtn.className='btn shareBtn'; projBtn.textContent='Read Pico Prism — Brevis Blog'; projectLink.appendChild(projBtn); row.appendChild(projectLink);
 
-    const memeIndex=Math.floor(Math.random()*MEME_URLS.length);
-    const memePath=MEME_URLS[memeIndex];
-    const dlM=document.createElement('a'); dlM.href=memePath; dlM.download=`brevis-meme-${memeIndex+1}.png`;
-    const dlMbtn=document.createElement('button'); dlMbtn.className='btn downloadBtn'; dlMbtn.textContent='⬇️ Download Meme'; dlM.appendChild(dlMbtn); row.appendChild(dlM);
-
-    const shareBtn=document.createElement('button'); shareBtn.className='btn shareBtn'; shareBtn.textContent='🐦 Share on X';
-    shareBtn.onclick=()=>{ const text=`I unlocked Brevis art and contributor tips on the Brevis Network! #BrevisChallenge`; 
+    const shareBtn=document.createElement('button'); shareBtn.className='btn downloadBtn'; shareBtn.textContent='🐦 Share on X';
+    shareBtn.onclick=()=>{ const text=`I unlocked Brevis contributor guidance on the Brevis Network! #BrevisChallenge`; 
       window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');};
     row.appendChild(shareBtn);
 
