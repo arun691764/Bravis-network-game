@@ -205,6 +205,12 @@ function showResults(){
     row.appendChild(shareBtn);
 
     resultContent.appendChild(row);
+    // Add Restart button so users can quickly retake the quiz
+    const restartBtn = document.createElement('button');
+    restartBtn.className = 'next';
+    restartBtn.textContent = 'Restart Quiz';
+    restartBtn.onclick = ()=>{ location.reload(); };
+    resultContent.appendChild(restartBtn);
   }
 }
 
