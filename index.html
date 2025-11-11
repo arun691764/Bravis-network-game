@@ -11,39 +11,47 @@
     --accent1:#00d4ff;
     --accent2:#7c3aed;
     --muted:#9aa4b2;
+    --opt1:#ff6b6b;
+    --opt2:#4ecdc4;
+    --opt3:#f7b801;
+    --opt4:#9b5de5;
   }
   html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,var(--bg1),#031025);color:#fff;}
   .wrap{max-width:920px;margin:18px auto;padding:18px;display:flex;flex-direction:column;gap:18px;}
   header{background:#000;padding:22px;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,0.6);text-align:center;position:relative;overflow:hidden}
   .handle{position:absolute;top:12px;right:14px;background:rgba(255,255,255,0.04);padding:6px 10px;border-radius:12px;font-size:13px;color:var(--accent1);border:1px solid rgba(255,255,255,0.04)}
-  h1{margin:8px 0 0 0;font-size:28px;color:var(--accent1);text-shadow:0 4px 18px rgba(0,212,255,0.06)}
-  .sub{margin-top:8px;color:var(--muted);font-size:15px}
+  h1{margin:8px 0 0 0;font-size:36px;color:var(--accent1);text-shadow:0 4px 18px rgba(0,212,255,0.06)}
+  .sub{margin-top:12px;color:var(--muted);font-size:18px;font-weight:700;text-shadow:0 1px 2px #000;}
   .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,0.6)}
-  .question{font-size:18px;font-weight:700;color:#c7f9ff;background:linear-gradient(90deg,#06112600,#00000000);padding:12px;border-radius:10px}
+  .question{font-size:20px;font-weight:700;color:#c7f9ff;padding:12px;border-radius:10px;background:linear-gradient(90deg,#06112600,#00000000);}
   .options{display:flex;flex-direction:column;gap:10px;margin-top:12px}
-  button.opt{appearance:none;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(90deg,#071426,#0f1724);color:#fff;padding:12px 14px;border-radius:10px;text-align:left;font-weight:700;cursor:pointer;transition:transform .12s,box-shadow .12s}
-  button.opt:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(124,58,237,0.12)}
+  button.opt{appearance:none;border:none;padding:14px 16px;border-radius:12px;font-weight:700;cursor:pointer;color:#fff;transition:transform .12s,box-shadow .12s;text-align:left;font-size:16px;}
+  button.opt:nth-child(1){background:var(--opt1);}
+  button.opt:nth-child(2){background:var(--opt2);}
+  button.opt:nth-child(3){background:var(--opt3);}
+  button.opt:nth-child(4){background:var(--opt4);}
+  button.opt:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.3);}
   button.opt:disabled{opacity:0.86;cursor:default;transform:none}
-  .correct{background:linear-gradient(90deg,#064e3b,#10b981)!important;box-shadow:0 8px 18px rgba(16,185,129,0.12)!important}
-  .wrong{background:linear-gradient(90deg,#6b0f0f,#ef4444)!important;box-shadow:0 8px 18px rgba(239,68,68,0.12)!important}
+  .correct{box-shadow:0 8px 18px rgba(16,185,129,0.4)!important;border:2px solid #10b981!important;}
+  .wrong{box-shadow:0 8px 18px rgba(239,68,68,0.4)!important;border:2px solid #ef4444!important;}
   .controls{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:12px;flex-wrap:wrap}
   .progress{color:var(--muted);font-weight:600}
-  .next{background:linear-gradient(90deg,var(--accent1),var(--accent2));border:none;color:#001; padding:10px 18px;border-radius:10px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,212,255,0.12)}
+  .next{background:linear-gradient(90deg,var(--accent1),var(--accent2));border:none;color:#001; padding:12px 22px;border-radius:12px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,212,255,0.12)}
   .next:disabled{opacity:0.65;cursor:default}
   .resultCard{display:flex;flex-direction:column;gap:12px;align-items:center;padding:22px}
-  .score{font-size:22px;font-weight:900;color:var(--accent1)}
-  .trophy{font-size:88px;margin-top:6px}
+  .score{font-size:24px;font-weight:900;color:var(--accent1)}
+  .trophy{font-size:96px;margin-top:6px}
   .rewardImg{width:100%;max-width:560px;border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,0.6);display:block}
   .shareRow{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-  .btn{padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+  .btn{padding:10px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
   .downloadBtn{background:var(--accent1);color:#001}
   .shareBtn{background:var(--accent2);color:#fff}
   .small{font-size:13px;color:var(--muted)}
   footer{margin-top:6px;text-align:center;color:var(--muted);font-size:13px}
-  /* responsive: keep everything comfortably visible on small screens */
   @media (max-width:520px){
     .wrap{padding:12px}
-    h1{font-size:22px}
+    h1{font-size:28px}
+    .sub{font-size:16px}
     .question{font-size:16px}
     .trophy{font-size:64px}
   }
@@ -53,56 +61,41 @@
   <div class="wrap">
     <header>
       <div class="handle"><a href="https://x.com/anshulgautam360" target="_blank" style="color:var(--accent1);text-decoration:none">→ @anshulgautam360</a></div>
-      <h1>Welcome to Brevis Network</h1>
-      <div class="sub">Play the game — earn memes and art</div>
+      <h1>Play the Game — Earn Memes & Art</h1>
+      <div class="sub">Test your knowledge and unlock exclusive rewards!</div>
     </header>
 
-    <!-- Quiz card -->
     <section id="quizCard" class="card">
       <div id="contentArea"></div>
-
       <div class="controls" id="controls" style="display:none">
         <div class="progress" id="progressText">Question 1/10</div>
         <button id="nextBtn" class="next">Next</button>
       </div>
     </section>
 
-    <!-- Result card (hidden until finish) -->
     <section id="resultCard" class="card" style="display:none">
       <div class="resultCard" id="resultContent"></div>
     </section>
 
-    <footer>Made for learning — save this file as <strong>index.html</strong> & add <em>assets/art1.png … art30.png</em></footer>
+    <footer>Made for learning — save as <strong>index.html</strong> & add your <em>assets/art1.png … art30.png</em></footer>
   </div>
 
 <script>
-/*
-  Quiz + Reward logic
-  - 10 real-but-easy Brevis-related questions
-  - win if score >= 7
-  - reward randomly chosen from 30 placeholder images: assets/art1.png … assets/art30.png
-  - download link and share on X (tweet intent) with handle @anshulgautam360
-*/
-
-/* Questions (real, simple language) */
 const QUESTIONS = [
   {q:"What technology does Brevis use to prove computations privately?", opts:["Zero-knowledge proofs (zk)","Proof-of-work mining","Federated learning","Differential privacy"], a:0},
-  {q:"Pico Prism focuses on achieving real-time proving for large Ethereum blocks. What is an approximate gas size discussed in the post?", opts:["~45M gas","~1M gas","~500 gas","~100B gas"], a:0},
+  {q:"Pico Prism focuses on achieving real-time proving for large Ethereum blocks. What is an approximate gas size?", opts:["~45M gas","~1M gas","~500 gas","~100B gas"], a:0},
   {q:"What benefit does proving on consumer hardware bring?", opts:["Lower costs and wider accessibility","Higher power consumption","Centralization","Less security"], a:0},
   {q:"Why is 'real-time proving' important for blockchains?", opts:["It allows quick verification on-chain","It increases token supply","It slows consensus","It reduces decentralization"], a:0},
   {q:"Which of these best describes the aim of Brevis' zk work?", opts:["Enable private, verifiable computation on-chain","Create a new social network","Mine more coins","Replace smart contracts"], a:0},
-  {q:"What does FHE (Fully Homomorphic Encryption) allow that is similar in value to zk-proofs?", opts:["Compute on encrypted data","Faster graphics rendering","Unlimited storage","Instant messaging"], a:0},
-  {q:"Pico Prism's improvements mostly affect which part of the stack?", opts:["Prover performance (speed & efficiency)","Wallet UI color","Token economics","Front-end animations"], a:0},
-  {q:"A practical goal of Brevis-style real-time proving is to:", opts:["Make proofs cheap enough to run frequently on-chain","Remove consensus","Increase gas costs intentionally","Stop smart contracts"], a:0},
-  {q:"Which chain is mentioned as a primary target when discussing gas blocks in the blog?", opts:["Ethereum","Bitcoin","XRP Ledger","Monero"], a:0},
+  {q:"What does FHE allow that is similar in value to zk-proofs?", opts:["Compute on encrypted data","Faster graphics rendering","Unlimited storage","Instant messaging"], a:0},
+  {q:"Pico Prism's improvements mostly affect which part of the stack?", opts:["Prover performance","Wallet UI color","Token economics","Front-end animations"], a:0},
+  {q:"A practical goal of Brevis-style real-time proving is to:", opts:["Make proofs cheap enough to run frequently on-chain","Remove consensus","Increase gas costs","Stop smart contracts"], a:0},
+  {q:"Which chain is mentioned as a primary target?", opts:["Ethereum","Bitcoin","XRP Ledger","Monero"], a:0},
   {q:"When a prover finishes faster and cheaper, what user benefit can result?", opts:["More private and scalable dApps","Slower apps","More central servers","Larger wallet sizes"], a:0}
 ];
 
-/* game vars */
 let index = 0;
 let score = 0;
-
-/* DOM refs */
 const contentArea = document.getElementById('contentArea');
 const controls = document.getElementById('controls');
 const nextBtn = document.getElementById('nextBtn');
@@ -111,7 +104,6 @@ const resultCard = document.getElementById('resultCard');
 const resultContent = document.getElementById('resultContent');
 const quizCard = document.getElementById('quizCard');
 
-/* Render question */
 function renderQuestion(i){
   const item = QUESTIONS[i];
   contentArea.innerHTML = `
@@ -131,41 +123,31 @@ function renderQuestion(i){
   nextBtn.style.display = 'none';
 }
 
-/* When user selects an answer */
 function handleAnswer(button, chosen, correct){
-  // lock buttons
   document.querySelectorAll('.opt').forEach(b => b.disabled = true);
-  // highlight
   if(chosen === correct){
-    button.classList.add('correct');
-    score++;
+    button.classList.add('correct'); score++;
   } else {
     button.classList.add('wrong');
     const correctBtn = document.querySelectorAll('.opt')[correct];
     if(correctBtn) correctBtn.classList.add('correct');
   }
-  // show next
   nextBtn.style.display = 'inline-block';
   nextBtn.textContent = (index === QUESTIONS.length - 1) ? 'Finish' : 'Next';
 }
 
-/* Next button */
 nextBtn.addEventListener('click', () => {
   index++;
   if(index < QUESTIONS.length){
     renderQuestion(index);
-  } else {
-    showResults();
-  }
+  } else { showResults(); }
 });
 
-/* Result and reward */
 function showResults(){
   quizCard.style.display = 'none';
   resultCard.style.display = 'block';
-  resultContent.innerHTML = ''; // clear
+  resultContent.innerHTML = '';
 
-  // show score & trophy
   const scoreDiv = document.createElement('div');
   scoreDiv.className = 'score';
   scoreDiv.innerHTML = `Your score: <strong>${score} / ${QUESTIONS.length}</strong>`;
@@ -178,92 +160,50 @@ function showResults(){
 
   const small = document.createElement('div');
   small.className = 'small';
-  if(score >= 7){
-    small.textContent = 'Congratulations! You qualified for a Brevis-themed art reward.';
-  } else {
-    small.textContent = 'You did not reach the reward threshold. Try again to win Brevis art!';
-  }
+  if(score >= 7){ small.textContent = 'Congrats! You qualified for a Brevis art reward.'; }
+  else{ small.textContent = 'Try again to win Brevis art!'; }
   resultContent.appendChild(small);
 
-  // if winner: pick a random art from 30 placeholders
   if(score >= 7){
-    const artIndex = Math.floor(Math.random()*30) + 1; // 1..30
+    const artIndex = Math.floor(Math.random()*30) + 1;
     const artPath = `assets/art${artIndex}.png`;
-    // image
     const img = document.createElement('img');
     img.className = 'rewardImg';
     img.alt = 'Brevis Reward Art';
     img.src = artPath;
-    // onerror: in case file missing, show placeholder colored box
     img.onerror = function(){
-      // replace with canvas-like placeholder
       const holder = document.createElement('div');
-      holder.style.width = '100%';
-      holder.style.maxWidth = '560px';
-      holder.style.height = '320px';
-      holder.style.borderRadius = '12px';
-      holder.style.display = 'flex';
-      holder.style.alignItems = 'center';
-      holder.style.justifyContent = 'center';
-      holder.style.background = 'linear-gradient(135deg,#0b1326,#211a3b)';
-      holder.style.boxShadow = '0 14px 40px rgba(0,0,0,0.6)';
-      holder.innerHTML = `<div style="color:var(--muted);font-weight:700">Art file missing:<br>assets/art${artIndex}.png</div>`;
-      if(img.parentNode) img.parentNode.replaceChild(holder, img);
+      holder.style.width='100%'; holder.style.maxWidth='560px'; holder.style.height='320px';
+      holder.style.borderRadius='12px'; holder.style.display='flex'; holder.style.alignItems='center';
+      holder.style.justifyContent='center'; holder.style.background='linear-gradient(135deg,#0b1326,#211a3b)';
+      holder.style.boxShadow='0 14px 40px rgba(0,0,0,0.6)';
+      holder.innerHTML=`<div style="color:var(--muted);font-weight:700">Art file missing:<br>assets/art${artIndex}.png</div>`;
+      if(img.parentNode) img.parentNode.replaceChild(holder,img);
     };
     resultContent.appendChild(img);
 
-    // actions row
     const row = document.createElement('div');
-    row.className = 'shareRow';
+    row.className='shareRow';
 
-    // Download button: create an anchor with download
-    const dl = document.createElement('a');
-    dl.href = artPath;
-    dl.download = `brevis-art-${artIndex}.png`;
-    const dlbtn = document.createElement('button');
-    dlbtn.className = 'btn downloadBtn';
-    dlbtn.textContent = '⬇️ Download';
-    dl.appendChild(dlbtn);
-    row.appendChild(dl);
+    const dl = document.createElement('a'); dl.href=artPath; dl.download=`brevis-art-${artIndex}.png`;
+    const dlbtn = document.createElement('button'); dlbtn.className='btn downloadBtn'; dlbtn.textContent='⬇️ Download';
+    dl.appendChild(dlbtn); row.appendChild(dl);
 
-    // Share on X (Twitter) - prefilled message
-    const shareBtn = document.createElement('button');
-    shareBtn.className = 'btn shareBtn';
-    shareBtn.textContent = '🐦 Share on X';
-    shareBtn.onclick = () => {
-      const text = `I just unlocked Brevis art on the Brevis Network Challenge! → @anshulgautam360 #BrevisChallenge`;
-      // If you host the image publicly, you could append the URL. For now we share text and handle.
-      const url = `https://x.com/anshulgautam360`; // point to handle or your project page
-      const intent = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
-      window.open(intent, '_blank');
-    };
-    row.appendChild(shareBtn);
-
-    // Add to result content
-    resultContent.appendChild(row);
+    const shareBtn = document.createElement('button'); shareBtn.className='btn shareBtn'; shareBtn.textContent='🐦 Share on X';
+    shareBtn.onclick=()=>{ const text=`I unlocked Brevis art on the Brevis Network Challenge! → @anshulgautam360 #BrevisChallenge`; 
+      const url=`https://x.com/anshulgautam360`; window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,'_blank'); };
+    row.appendChild(shareBtn); resultContent.appendChild(row);
   } else {
-    // If not winner: show try again button
-    const tryBtn = document.createElement('button');
-    tryBtn.className = 'next';
-    tryBtn.textContent = 'Try Again';
-    tryBtn.onclick = () => location.reload();
-    resultContent.appendChild(tryBtn);
+    const tryBtn=document.createElement('button'); tryBtn.className='next'; tryBtn.textContent='Try Again';
+    tryBtn.onclick=()=>location.reload(); resultContent.appendChild(tryBtn);
   }
 
-  // show handle and attribution
-  const foot = document.createElement('div');
-  foot.className = 'small';
-  foot.style.marginTop = '12px';
-  foot.innerHTML = `Shared by → <a href="https://x.com/anshulgautam360" target="_blank" style="color: var(--accent1); text-decoration:none">@anshulgautam360</a>`;
+  const foot=document.createElement('div'); foot.className='small'; foot.style.marginTop='12px';
+  foot.innerHTML=`Shared by → <a href="https://x.com/anshulgautam360" target="_blank" style="color: var(--accent1); text-decoration:none">@anshulgautam360</a>`;
   resultContent.appendChild(foot);
 }
 
-/* helper: escape html */
-function escapeHtml(s){
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-/* initial render */
+function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 renderQuestion(index);
 </script>
 </body>
