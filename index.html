@@ -18,8 +18,8 @@ body{
 header{background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); padding:30px;border-radius:16px;text-align:center;box-shadow:0 14px 50px rgba(2,6,23,0.7);border:1px solid rgba(255,255,255,0.04)}
 h1{font-size:40px;color:var(--accent1); margin:0;text-shadow:0 8px 36px rgba(0,212,255,0.08);}
 .sub{font-size:16px;color:var(--muted);margin-top:10px;font-weight:800;}
-h1{font-size:32px;color:var(--accent1); margin:0;text-shadow:0 6px 30px rgba(0,212,255,0.06);}
-.sub{font-size:15px;color:var(--muted);margin-top:8px;font-weight:700;}
+h1{font-size:44px;color:var(--accent1); margin:0;font-weight:800;text-shadow:0 12px 48px rgba(0,212,255,0.10);} 
+.sub{font-size:20px;color:var(--muted);margin-top:12px;font-weight:900;}
 .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
 .question{font-size:18px;font-weight:800;padding:14px;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));}
 .options{display:flex; flex-direction:column; gap:10px;margin-top:12px;}
@@ -48,13 +48,16 @@ button.opt:disabled{opacity:0.9;cursor:default;transform:none;}
 .contribute h3{margin:0 0 8px 0;color:var(--accent2)}
 .contribute ol{padding-left:20px;margin:0}
 .contribute li{margin:8px 0;color:#cfe9ff}
+.credit{margin-top:8px;color:#cfe9ff;font-weight:700;font-size:14px}
+header{background:radial-gradient(1200px 400px at 10% 10%, rgba(0,212,255,0.06), transparent), linear-gradient(180deg, rgba(124,58,237,0.06), rgba(7,18,51,0.6));}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
-  <h1>Welcome to Brevis Network</h1>
-  <div class="sub">Play & Solve — Learn how to contribute with real contribution and get the 99% role</div>
+  <h1>Welcome to Brevis Network Quiz</h1>
+  <div class="credit">Created by - <a href="https://twitter.com/anshulgautam360" target="_blank">@anshulgautam360</a></div>
+  <div class="sub">Play &amp; Solve — Learn how to contribute with real contributions and earn the 99% role</div>
 </header>
 
 <section id="quizCard" class="card">
@@ -141,6 +144,10 @@ function showResults(){
   
   const small=document.createElement('div'); small.className='small';
   if(score>=7){
+    small.innerHTML = '<strong>You have won this quiz!</strong><br/>Below are contribution steps and guidance to help you meaningfully contribute to the project and earn the 99% role.';
+    resultContent.appendChild(small);
+  
+  if(score>=7){
     // Display contributor guidance only — no download options provided
     const contrib=document.createElement('div'); contrib.className='contribute';
     contrib.innerHTML = `
@@ -179,6 +186,8 @@ function showResults(){
 
     resultContent.appendChild(row);
   } else{
+    small.textContent = 'Try again to unlock contributor guidance and learn how to contribute.';
+    resultContent.appendChild(small);
     const tryBtn=document.createElement('button'); tryBtn.className='next'; tryBtn.textContent='Try Again';
     tryBtn.onclick=()=>location.reload(); resultContent.appendChild(tryBtn);
   }
