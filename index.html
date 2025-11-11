@@ -8,7 +8,6 @@
 :root{
   --bg1:#04102a; --bg2:#071233; --accent1:#00d4ff; --accent2:#7c3aed; --muted:#9aa4b2;
   --opt1:#ff6b6b; --opt2:#4ecdc4; --opt3:#f7b801; --opt4:#9b5de5;
-  --light-bg: rgba(255,255,255,0.12);
   --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
 }
 *{box-sizing:border-box}
@@ -50,7 +49,17 @@ button.opt:disabled{opacity:0.9;cursor:default;transform:none}
 .contribute h3{margin:0 0 8px 0;color:var(--accent2)}
 .contribute ol{padding-left:20px;margin:0}
 .contribute li{margin:8px 0;color:#cfe9ff}
-.small{font-size:15px;color:#001;text-align:center;background:var(--light-bg);padding:12px;border-radius:12px;margin-top:8px;font-weight:900;box-shadow:0 4px 16px rgba(0,0,0,0.2)}
+.small{
+  font-size:15px;
+  color:#000;
+  text-align:center;
+  background:linear-gradient(90deg,#ffe259,#ffcc00);
+  padding:12px;
+  border-radius:12px;
+  margin-top:10px;
+  font-weight:900;
+  box-shadow:0 4px 18px rgba(255,204,0,0.4);
+}
 .shareRow{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;justify-content:center}
 .btn{padding:10px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
 .downloadBtn{background:var(--accent1);color:#001}
@@ -79,7 +88,6 @@ button.opt:disabled{opacity:0.9;cursor:default;transform:none}
 </div>
 
 <script>
-// Quiz Logic with random answer positions (same as before)
 const QUESTIONS = [
   {q:"What technology does Brevis use to prove computations privately?", opts:["Zero-knowledge proofs","Proof-of-work","Federated learning","Differential privacy"], correctIndex:0},
   {q:"Approximate gas size targeted by Pico Prism for large Ethereum blocks?", opts:["~45M","~1M","~500","~100B"], correctIndex:0},
@@ -165,7 +173,12 @@ function showResults(){
   if(score>=7){
     small.innerHTML = '<strong>You have won this quiz!</strong><br/>Below are contribution steps and guidance to help you meaningfully contribute to the project and earn the 99% role.';
   } else {
-    small.textContent = 'Try again to unlock contributor guidance and learn how to contribute.';
+    small.innerHTML = '<strong>Better luck next time!</strong><br/>Try again to unlock contributor guidance.';
+    const tryBtn = document.createElement('button');
+    tryBtn.className = 'next';
+    tryBtn.textContent = 'Try Again';
+    tryBtn.onclick = () => location.reload();
+    resultContent.appendChild(tryBtn);
   }
   resultContent.appendChild(small);
 
@@ -204,18 +217,9 @@ function showResults(){
     shareBtn.onclick = ()=>{ const text = `I unlocked Brevis contributor guidance on the Brevis Network! #BrevisChallenge`; window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank'); };
     row.appendChild(shareBtn);
 
-    resultContent.appendChild(row);
-    // Add Restart button so users can quickly retake the quiz
     const restartBtn = document.createElement('button');
     restartBtn.className = 'next';
     restartBtn.textContent = 'Restart Quiz';
-    restartBtn.onclick = ()=>{ location.reload(); };
-    resultContent.appendChild(restartBtn);
-  }
-}
+    restartBtn.onclick = ()=> location.reload();
+    row.appendChild(restartBtn);
 
-function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-renderQuestion(index);
-</script>
-</body>
-</html>
